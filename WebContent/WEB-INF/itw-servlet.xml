@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<context:property-placeholder location="/WEB-INF/database.properties" />
+	<context:component-scan base-package="com.agileidc.itw" />
+
+	<tx:annotation-driven transaction-manager="hibernateTransactionManager" />
+	<mvc:annotation-driven />
+
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/mainPage.html" />
+			<mvc:mapping path="/mainPage1.html" />
+			<bean class="com.agileidc.itw.web.SignOnInterceptor" />
+		</mvc:interceptor>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="language"></property>
+		</bean>
+
+	</mvc:interceptors>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="1000000000" />
+	</bean>
+	<bean id="appCacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation">
+			<value>/WEB-INF/ehcache.xml</value>
+		</property>
+	</bean>
+
+	<bean id="methodTimingAdvice" class="com.agileidc.itw.interceptor.MethodTimingInterceptor" />
+
+	<bean id="methodCachingAdvice" class="com.agileidc.itw.interceptor.MethodCachingInterceptor">
+		<property name="cacheManager" ref="appCacheManager" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="getAllItemsPointcut"
+			expression="execution(* *..ItwUserServiceImpl.listItwUsers())" />
+		<aop:advisor id="methodTimingAdvisor" advice-ref="methodTimingAdvice"
+			pointcut-ref="getAllItemsPointcut" />
+		<aop:advisor id="methodCachingAdvisor" advice-ref="methodCachingAdvice"
+			pointcut-ref="getAllItemsPointcut" />
+	</aop:config>
+
+	<bean id="jspViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"> 
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" /> <property 
+		name="url" value="jdbc:oracle:thin:@localhost:1521:XE" /> <property name="username" 
+		value="XE" /> <property name="password" value="admin" /> <property name="initialSize" 
+		value="5" /> <property name="maxActive" value="10" /> </bean> -->
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.agileidc.itw.model.Employee</value>
+				<value>com.agileidc.itw.model.ItwUser</value>
+				<value>com.agileidc.itw.model.ItwTaskBug</value>
+				<value>com.agileidc.itw.model.ItwActivityType</value>
+				<value>com.agileidc.itw.model.ItwProject</value>
+				<value>com.agileidc.itw.model.ItwSeverity</value>
+				<value>com.agileidc.itw.model.ItwPriority</value>
+				<value>com.agileidc.itw.model.ItwPlatForms</value>
+				<value>com.agileidc.itw.model.ItwStatusTypes</value>
+				<value>com.agileidc.itw.model.ItwRoles</value>
+				<value>com.agileidc.itw.model.ItwUserTypes</value>
+				<value>com.agileidc.itw.model.ItwUserRoles</value>
+				<value>com.agileidc.itw.model.ItwCompany</value>
+				<value>com.agileidc.itw.model.ItwUserIcon</value>
+				<value>com.agileidc.itw.model.ItwTweets</value>
+				<value>com.agileidc.itw.model.ItwModule</value>
+				<value>com.agileidc.itw.model.ItwStagesTypes</value>
+				<value>com.agileidc.itw.model.ItwReleases</value>
+				<value>com.agileidc.itw.model.ItwBrowserTypes</value>
+				<value>com.agileidc.itw.model.ItwOnlineUsers</value>
+				<value>com.agileidc.itw.model.ItwMessage</value>
+				<value>com.agileidc.itw.model.Document</value>
+				<value>com.agileidc.itw.model.ItwModuleTree</value>
+				<value>com.agileidc.itw.model.ItwImage</value>
+				<value>com.agileidc.itw.model.ItwLangTypes</value>
+				<value>com.agileidc.itw.model.ItwCheckOutData</value>
+				<value>com.agileidc.itw.model.ItwClient</value>
+				<value>com.agileidc.itw.model.ItwUserLogs</value>
+				<value>com.agileidc.itw.model.ItwTaskBugAudit</value>
+				<value>com.agileidc.itw.model.ItwProjectModule</value>
+				<value>com.agileidc.itw.model.ItwChatGroupIssue</value>
+				<value>com.agileidc.itw.model.ItwChartStatus</value>
+				<value>com.agileidc.itw.model.ItwSeverityColour</value>
+				<value>com.agileidc.itw.model.ItwReleaseProcess</value>
+				<value>com.agileidc.itw.model.ItwReleaseDocument</value>
+				<value>com.agileidc.itw.model.ItwRca</value>
+				<value>com.agileidc.itw.model.ItwIssuePark</value>
+				<value>com.agileidc.itw.model.ItwRcaFeedback</value>
+				<value>com.agileidc.itw.model.ItwUserGroup</value>
+			</list>
+		</property>
+		<!-- <property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.validator.apply_to_ddl">false</prop>
+				<prop key="hibernate.validator.autoregister_listeners">false</prop>
+				<prop key="hibernate.connection.SetBigStringTryClob">true</prop>
+				<prop key="hibernate.jdbc.batch_size">0</prop>
+			</props>
+		</property> -->
+	</bean>
+
+	<bean id="hibernateTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+	<bean id="applicationContextProvider" class="com.agileidc.itw.web.ApplicationContextProvider1"></bean>
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="language" />
+	</bean>
+
+	<bean id="mappingHandler"
+		class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="localeChangeInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.view.XmlViewResolver">
+		<property name="location" value="/WEB-INF/jasper-views.xml" />
+		<property name="order" value="0" />
+	</bean>
+
+</beans>

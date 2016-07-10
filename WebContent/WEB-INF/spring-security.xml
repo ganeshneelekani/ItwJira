@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:p="http://www.springframework.org/schema/p" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/security
+                           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+   <security:http auto-config="true">
+		<security:intercept-url pattern="/mainPage1*" access="ROLE_ADMIN,ROLE_USER,ROLE_MANAGER" />
+		<!--  
+		
+		<security:intercept-url pattern="/userConfigList*" access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/roleConfigList*" access="ROLE_ADMIN" />
+		
+		
+		<security:intercept-url pattern="/ItwClientConfigList*" access="ROLE_ADMIN" />	
+		<security:intercept-url pattern="/itwPlatFormsConfigList*" access="ROLE_ADMIN" />	
+		<security:intercept-url pattern="/itwPriorityConfigList*" access="ROLE_ADMIN" />	
+		<security:intercept-url pattern="/itwReleasesConfigList*" access="ROLE_ADMIN" />	
+		<security:intercept-url pattern="/itwSeverityConfigList*" access="ROLE_ADMIN" />	
+		<security:intercept-url pattern="/itwBrowserTypesConfigList*" access="ROLE_ADMIN" />	
+		<security:intercept-url pattern="/itwStagesTypesConfigList*" access="ROLE_ADMIN" />	
+		<security:intercept-url pattern="/itwModuleConfigList*" access="ROLE_ADMIN" />		
+		<security:intercept-url pattern="/companyConfigList*" access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/itwStatusTypesConfigList*" access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/itwUserLogsList*" access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/itwReleaseDocumentConfigList*" access="ROLE_USER" />
+		<security:intercept-url pattern="/itwReleaseProcessConfigList*" access="ROLE_USER" />
+		<security:intercept-url pattern="/itwReleaseProcessConfigList*" access="ROLE_USER" />
+		-->
+		<security:form-login login-page="/signOn.html" default-target-url="/mainPage1.html"
+			authentication-failure-url="/loginfailed.html" />
+		<security:logout logout-success-url="/doSignOut.html" />
+	</security:http>
+
+     <security:authentication-manager>
+	  <security:authentication-provider>
+	  <security:password-encoder hash="md5" />
+	    	<security:jdbc-user-service data-source-ref="dataSource"
+
+				users-by-username-query="
+		      select userid,password,1
+		      from itw_users where userid=?"
+
+				authorities-by-username-query="
+		      select userid,authority from itw_users 
+		      where userid =?  " />
+	  </security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>
+
+<!-- 
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<http auto-config="true">
+	 <intercept-url pattern="/j_spring_security_check" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+         <intercept-url pattern="/signOn" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+       
+		<intercept-url pattern="/mainPage1*" access="ROLE_USER" />
+		<form-login login-page="/signOn" default-target-url="/mainPage1"
+			authentication-failure-url="/loginfailed" />
+		<logout logout-success-url="/doSignOut" />
+	</http>
+
+	<authentication-manager>
+		<authentication-provider>
+			<password-encoder hash="md5" />
+			<jdbc-user-service data-source-ref="dataSource"
+
+				users-by-username-query="
+		      select userID,password, enabled 
+		      from itw_users where userid=?"
+
+				authorities-by-username-query="
+		      select u.userid, ur.AUTHORITY from itw_users u, itw_user_role ur 
+		      where u.userid = ur.userid and u.userid =?  " />
+		</authentication-provider>
+	</authentication-manager>
+	
+</beans:beans>  -->

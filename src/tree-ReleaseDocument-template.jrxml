@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tree-Role-template" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="template.type" value="columnar"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#000000" fontName="Times New Roman" fontSize="28" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="13" isBold="true" isUnderline="true" pdfFontName="Times-Roman"/>
+	<style name="DetailUnderline" forecolor="#000000" fontName="Times New Roman" fontSize="11" isUnderline="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" forecolor="#000000" fontName="Times New Roman" fontSize="10" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" fontSize="10" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="JasperCustomSubReportLocation" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="JasperCustomSubReportDatasource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="title" class="java.lang.String"/>
+	<field name="createdBy" class="java.lang.String"/>
+	<field name="revisedBy" class="java.lang.String"/>
+	<field name="releaseName" class="java.lang.String"/>
+	<field name="sourceCodeVersion" class="java.lang.String"/>
+	<field name="buisnessImpact" class="java.lang.String"/>
+	<field name="envoirnmentEffected" class="java.lang.String"/>
+	<field name="objectImpacted" class="java.lang.String"/>
+	<field name="releaseDate" class="java.sql.Date"/>
+	<field name="introduction" class="java.lang.String"/>
+	<field name="scope" class="java.lang.String"/>
+	<field name="systemRequirements" class="java.lang.String"/>
+	<field name="operatingsystemssupported" class="java.lang.String"/>
+	<field name="prerequisites" class="java.lang.String"/>
+	<field name="knownIssues" class="java.lang.String"/>
+	<field name="assumptionDependencies" class="java.lang.String"/>
+	<field name="defects" class="java.lang.String"/>
+	<field name="specialInstructions" class="java.lang.String"/>
+	<field name="releaseProcessInsrtuctions" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="550" splitType="Stretch">
+			<image>
+				<reportElement x="2" y="0" width="100" height="100" />
+				<imageExpression><![CDATA["Agile.png"]]></imageExpression>
+			</image>
+			<frame>
+					<reportElement positionType="Float" x="130" y="269" width="410" height="83" />
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Title" x="0" y="0" width="410" height="54" />
+					<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="85" y="57" width="156" height="26" />
+					<textFieldExpression><![CDATA[$F{releaseDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+		
+		</band>
+		<band height="200" splitType="Stretch">
+			<image>
+				<reportElement x="2" y="0" width="56" height="80" />
+			</image>
+			<frame>
+				<reportElement positionType="Float" x="20" y="31" width="520" height="21" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="139" height="20" />
+					<text><![CDATA[Release Name:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="139" y="0" width="381" height="20" />
+					<textFieldExpression><![CDATA[$F{releaseName}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="80" width="520" height="21" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="139" height="20" />
+					<text><![CDATA[Created-By:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="139" y="0" width="381" height="20" />
+					<textFieldExpression><![CDATA[$F{createdBy}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="123" width="520" height="21" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="139" height="20" />
+					<text><![CDATA[Revised-By:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="139" y="0" width="381" height="20" />
+					<textFieldExpression><![CDATA[$F{revisedBy}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="164" width="520" height="21" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="139" height="20" />
+					<text><![CDATA[SourceCodeVersion:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="139" y="0" width="381" height="20" />
+					<textFieldExpression><![CDATA[$F{sourceCodeVersion}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="550" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="20" y="10" width="520" height="50" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="520" height="20" />
+					<text><![CDATA[Introduction:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="30" width="520" height="20" />
+					<textFieldExpression><![CDATA[$F{introduction}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="90" width="520" height="49" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="520" height="20" />
+					<text><![CDATA[Scope:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="29" width="520" height="20" />
+					<textFieldExpression><![CDATA[$F{scope}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="170" width="520" height="52" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="520" height="20" />
+					<text><![CDATA[System Requirements:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="32" width="520" height="20" />
+					<textFieldExpression><![CDATA[$F{systemRequirements}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="250" width="520" height="50" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="520" height="20" />
+					<text><![CDATA[Operating Systems Supported:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="30" width="520" height="20" />
+					<textFieldExpression><![CDATA[$F{operatingsystemssupported}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="330" width="520" height="49" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="520" height="20" />
+					<text><![CDATA[Prerequisites:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="29" width="520" height="20" />
+					<textFieldExpression><![CDATA[$F{prerequisites}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="410" width="520" height="50" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="520" height="20" />
+					<text><![CDATA[Known Issues:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="30" width="520" height="20" />
+					<textFieldExpression><![CDATA[$F{knownIssues}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="490" width="520" height="49" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="520" height="20" />
+					<text><![CDATA[Assumption/Dependencies]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="29" width="520" height="20" />
+					<textFieldExpression><![CDATA[$F{assumptionDependencies}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="505" splitType="Stretch">
+			<image>
+				<reportElement x="2" y="0" width="56" height="80" />
+			</image>
+			<frame>
+				<reportElement positionType="Float" x="20" y="31" width="520" height="49" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="520" height="20" />
+					<text><![CDATA[Defects:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="29" width="520" height="20" />
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{defects}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="100" width="520" height="50" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="520" height="20" />
+					<text><![CDATA[Business Impact:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="30" width="520" height="20" />
+					<textFieldExpression><![CDATA[$F{buisnessImpact}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="180" width="520" height="49" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="520" height="20" />
+					<text><![CDATA[EnvironmentEffected:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="29" width="520" height="20"/>
+					<textFieldExpression><![CDATA[$F{envoirnmentEffected}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="260" width="520" height="57" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="520" height="20" />
+					<text><![CDATA[Special Instructions:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="31" width="520" height="26" />
+					<textFieldExpression><![CDATA[$F{specialInstructions}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="340" width="520" height="52" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="520" height="20" />
+					<text><![CDATA[Object Impacted:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="32" width="520" height="20" />
+					<textFieldExpression><![CDATA[$F{objectImpacted}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="20" y="440" width="520" height="20" />
+				<staticText>
+					<reportElement style="DetailUnderline" positionType="Float" x="0" y="0" width="520" height="20" />
+					<text><![CDATA[Release Process Instructions:]]></text>
+				</staticText>
+			</frame>
+		</band>
+		<band height="100" splitType="Stretch">
+			<subreport>
+				<reportElement x="20" y="0" width="520" height="48" />
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{JasperCustomSubReportDatasource}.getData())]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{JasperCustomSubReportLocation}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="2" y="0" width="555" height="13" forecolor="#D0B48E" backcolor="#9DB1B8" />
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="-1" width="40" height="13" forecolor="#FFFFFF" />
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="-1" width="80" height="13" forecolor="#FFFFFF" />
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="0" width="197" height="13" forecolor="#FFFFFF" />
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

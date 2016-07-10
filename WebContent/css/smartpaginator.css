@@ -1,0 +1,117 @@
+﻿.pager
+{
+    width: 720px;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    padding-top: 10px;
+    padding-left: 10px; /*border-radius: 8px; 	-moz-border-radius: 8px;*/
+}
+.pager div.short
+{
+    float: right;
+    margin: 0;
+    padding: 0;
+    margin-right: 10px;
+    width: 74px;
+}
+.pager div.short input
+{
+    width: 28px;
+    border: 1px solid #666;;
+    margin-left: 8px;
+    float: left;
+}
+.pager ul
+{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+    margin: 0 4px 0 64%;
+}
+.pager ul li
+{
+    display: inline;
+    margin-left: 2px;
+}
+.pager ul li a
+{
+    text-decoration: none;
+    display: inline-table;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+
+.pager span
+{
+    margin-left: 4px;
+    color: #000;
+    float: left;
+}
+.pager .btn
+{
+    display: block;
+    width: 40px;
+    text-align: center;
+    float: left;
+    padding: 0;
+    margin: 0;
+    margin-left: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.pager .disabled
+{
+    color: #A0A0A0 !important;
+    text-shadow: 1px 1px 1px #FFFFFF;
+}
+/*green*/.paginationwrapper
+{
+
+}
+.green.normal
+{
+    background-color: #666;
+    color: White;
+    border: solid 1px #666;
+}
+.green.active
+{
+    background-color: #ccc;
+    color: #333;
+    border: solid 1px #666;
+}
+.pager.green .btn
+{
+    background-color: #666;
+    color: White;
+    border: solid 1px #666;
+}
+#mt th{
+	background-image:url(../images/thbg.jpg);
+	background-repeat:repeat-x;
+	height:47px;
+	border:1px solid #d7d7d7;
+}
+#mt td{
+	border:1px solid #d7d7d7;
+	padding:6px;
+}
+
+#mt tr:hover{
+	background-color:#f7faff;
+	cursor:pointer;
+	color:#CE2020;
+}

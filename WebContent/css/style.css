@@ -1,0 +1,404 @@
+@charset "utf-8";
+/* CSS Document */
+
+<!--
+body {
+	font: 100%/1.4 Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #000;
+	background-image:url(../images/bodybg.png);
+	background-repeat:repeat-x;
+	background-color:#ffffff;
+}
+
+/* ~~ Element/tag selectors ~~ */
+ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
+	padding-right: 15px;
+	padding-left: 15px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+}
+a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+	border: none;
+}
+
+/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
+a:link {
+	color:#fff;
+	text-decoration: none; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
+}
+a:visited {
+	color: #fff;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+	text-decoration: none;
+}
+
+/* ~~ this container surrounds all other divs giving them their percentage-based width ~~ */
+.container {
+	width: 90%;
+	max-width: 1260px;/* a max-width may be desirable to keep this layout from getting too wide on a large monitor. This keeps line length more readable. IE6 does not respect this declaration. */
+	min-width: 780px;/* a min-width may be desirable to keep this layout from getting too narrow. This keeps line length more readable in the side columns. IE6 does not respect this declaration. */	
+
+	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout. It is not needed if you set the .container's width to 100%. */
+}
+
+/* ~~ the header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo ~~ */
+.header {
+
+}
+.headerlist {
+	position:relative;
+	float:right;
+	border-left:1px solid #fff;
+	padding-left:14px;
+	margin-top:18px;
+}
+
+.headerlist ul li {
+	list-style:none;
+	line-height:1.2;
+	font-size:14px;
+	color:#fff;
+	padding:10px 0;
+}
+
+/* ~~ These are the columns for the layout. ~~ 
+
+1) Padding is only placed on the top and/or bottom of the divs. The elements within these divs have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the div itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the div and place a second div within it with no width and the padding necessary for your design.
+
+2) No margin has been given to the columns since they are all floated. If you must add margin, avoid placing it on the side you're floating toward (for example: a right margin on a div set to float right). Many times, padding can be used instead. For divs where this rule must be broken, you should add a "display:inline" declaration to the div's rule to tame a bug where some versions of Internet Explorer double the margin.
+
+3) Since classes can be used multiple times in a document (and an element can also have multiple classes applied), the columns have been assigned class names instead of IDs. For example, two sidebar divs could be stacked if necessary. These can very easily be changed to IDs if that's your preference, as long as you'll only be using them once per document.
+
+4) If you prefer your nav on the right instead of the left, simply float these columns the opposite direction (all right instead of all left) and they'll render in reverse order. There's no need to move the divs around in the HTML source.
+
+*/
+.sidebar1 {
+	float: left;
+	width: 22.5%;
+	background: #93A5C4;
+	padding-bottom: 10px;
+}
+.content {
+	width: 60%;
+	float: left;
+}
+.sidebar2 {
+	float: left;
+	width: 15%;
+	background: #93A5C4;
+	padding: 10px 0;
+}
+
+/* ~~ This grouped selector gives the lists in the .content area space ~~ */
+.content ul, .content ol { 
+	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+}
+
+/* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
+ul.nav {
+	list-style: none; /* this removes the list marker */
+	border-top: 1px solid #666; /* this creates the top border for the links - all others are placed using a bottom border on the LI */
+	margin-bottom: 15px; /* this creates the space between the navigation on the content below */
+}
+ul.nav li {
+	border-bottom: 1px solid #666; /* this creates the button separation */
+}
+ul.nav a, ul.nav a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
+	padding: 5px 5px 5px 15px;
+	display: block; /* this gives the link block properties causing it to fill the whole LI containing it. This causes the entire area to react to a mouse click. */
+	text-decoration: none;
+	background: #8090AB;
+	color: #000;
+}
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+	background: #6F7D94;
+	color: #FFF;
+}
+
+/* ~~The footer ~~ */
+.footer {
+	padding: 10px 0;
+	background: #6F7D94;
+	position: relative;/* this gives IE6 hasLayout to properly clear */
+	clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
+}
+
+/* ~~miscellaneous float/clear classes~~ */
+.fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the #container) if the #footer is removed or taken out of the #container */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+-->
+
+.pageborderleft {
+	position:relative;
+	width:34px;
+	height:100%;
+	background-image:url(../images/borderleft.png);
+	background-repeat:no-repeat;
+	left: -22px;
+	float:left;
+}
+
+.page {
+	font-size:12px;
+}
+
+.pageborderright {
+	position:relative;
+	width:34px;
+	height:100%;
+	background-image:url(../images/borderright.png);
+	background-repeat:no-repeat;
+	left: 22px;
+	float:right;
+	top: -536px;
+}
+
+.pageheader {
+	background-color:#898989;
+	padding: 12px 10px;
+	font-size:22px;
+	color:#fff;
+	text-shadow:0 1px 2px #000;
+	margin-top:24px;
+}
+
+.page th{
+	font-size:16px;
+	font-weight:400;
+	color:#ce2020;
+}
+
+.save{
+	font-size:12px;
+	font-weight:400;
+	background-color:#e7e6e6;
+	border:1px solid #b2b2b2;
+	cursor:pointer;
+	padding:6px 16px;
+	color:#333;
+}
+
+/*-----------------------side menu css------------------------*/
+#navigationMenu {
+	position:fixed;
+	right:0;
+	top:120px;
+}
+
+#navigationMenu li{
+	list-style:none;
+	height:39px;
+	padding:2px;
+	width:40px;
+}
+
+#navigationMenu span{
+	/* Container properties */
+	width:0;
+	right:38px;
+	padding:0;
+	position:absolute;
+	overflow:hidden;
+
+	/* Text properties */
+	font-family:'Myriad Pro',Arial, Helvetica, sans-serif;
+	font-size:18px;
+	font-weight:bold;
+	letter-spacing:0.6px;
+	white-space:nowrap;
+	line-height:39px;
+	
+	/* CSS3 Transition: */
+	-webkit-transition: 0.25s;
+	
+	/* Future proofing (these do not work yet): */
+	-moz-transition: 0.25s;
+	transition: 0.25s;
+}
+
+#navigationMenu a{
+	background:url('../images/navigation.jpg') no-repeat;
+	height:39px;
+	width:38px;
+	display:block;
+	position:relative;
+}
+
+/* General hover styles */
+
+#navigationMenu a:hover span{ width:auto; padding:0 20px;overflow:visible; }
+#navigationMenu a:hover{
+	text-decoration:none;
+	
+	/* CSS outer glow with the box-shadow property */
+	-moz-box-shadow:0 0 5px #9ddff5;
+	-webkit-box-shadow:0 0 5px #9ddff5;
+	box-shadow:0 0 5px #9ddff5;
+}
+
+/* Green Button */
+
+#navigationMenu .home {	background-position:0 0;}
+#navigationMenu .home:hover {	background-position:0 -39px;}
+#navigationMenu .home span{
+	background-color:#7da315;
+	color:#3d4f0c;
+	text-shadow:1px 1px 0 #999;
+}
+
+/* Blue Button */
+
+#navigationMenu .about { background-position:-38px 0;}
+#navigationMenu .about:hover { background-position:-38px -39px;}
+#navigationMenu .about span{
+	background-color:#1e8bb4;
+	color:#223a44;
+	text-shadow:1px 1px 0 #44a8d0;
+}
+
+/* Orange Button */
+
+#navigationMenu .services { background-position:-76px 0;}
+#navigationMenu .services:hover { background-position:-76px -39px;}
+#navigationMenu .services span{
+	background-color:#c86c1f;
+	color:#5a3517;
+	text-shadow:1px 1px 0 #d28344;
+}
+
+/* Yellow Button */
+
+#navigationMenu .portfolio { background-position:-114px 0;}
+#navigationMenu .portfolio:hover{ background-position:-114px -39px;}
+#navigationMenu .portfolio span{
+	background-color:#d0a525;
+	color:#604e18;
+	text-shadow:1px 1px 0 #d8b54b;
+}
+
+/* Purple Button */
+
+#navigationMenu .contact { background-position:-152px 0;}
+#navigationMenu .contact:hover { background-position:-152px -39px;}
+#navigationMenu .contact span{
+	background-color:#af1e83;
+	color:#460f35;
+	text-shadow:1px 1px 0 #d244a6;
+}
+
+#navigationMenu .effort { background-position:-190px 0;}
+#navigationMenu .effort:hover { background-position:-190px -39px;}
+#navigationMenu .effort span{
+	background-color:#E82424;
+	color:#7F0000;
+	text-shadow:1px 1px 0 #FF6969;
+}
+
+#navigationMenu .test { background-position:-228px 0;}
+#navigationMenu .test:hover { background-position:-228px -39px;}
+#navigationMenu .test span{
+	background-color:#00B1C1;
+	color:#005962;
+	text-shadow:1px 1px 0 #59F0FD;
+}
+
+#navigationMenu .voice { background-position:-266px 0;}
+#navigationMenu .voice:hover { background-position:-266px -39px;}
+#navigationMenu .voice span{
+	background-color:#979797;
+	color:#535353;
+	text-shadow:1px 1px 0 #C3C3C3;
+}
+
+#navigationMenu .comment { background-position:-304px 0;}
+#navigationMenu .comment:hover { background-position:-304px -39px;}
+#navigationMenu .comment span{
+	background-color:#7da315;
+	color:#3d4f0c;
+	text-shadow:1px 1px 0 #999;
+}
+/*-----------------side menu css end-----------------------------*/
+
+/* side navigation */
+#content {
+    width: 1100px;
+}
+
+#content a{
+	color:#333;
+}
+
+.contentblock {
+  display: block;
+  padding: 15px 20px;
+}
+
+.contentblock.hidden {
+  display: none;
+}
+
+#sidemenu {
+  margin: 0 46px 0 0;
+  padding: 0;
+  width: 257px;
+  height:615px;
+  float: left;
+  background: url(../images/sidemenubg.JPG);  
+}
+
+
+#sidemenu li { display: block; text-align: left;}
+
+#sidemenu li a { 
+  display: block;
+  padding: 14px 0 14px 20px;
+  color: #555;
+  text-decoration: none;
+  background:url(../images/tabbg.jpg);
+}
+#sidemenu li a:hover {
+  background: #f2f2f2;
+}
+
+#sidemenu li a strong { 
+  display: block;
+  margin-top: 5px;
+}
+
+#sidemenu li a.open {
+  width: 272px;
+  background: url(../images/activetabbg.png);
+  color:#fff;
+  text-shadow:0 1px 1px #000;
+  font-weight:bold;
+}
+
+.clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
+.clearfix { display: inline-block; }
+/*------end of Side menu-------*/
+
+.edit a{
+	color:#000;
+}
+.edit:hover a{
+	color:#ce2020;
+}
